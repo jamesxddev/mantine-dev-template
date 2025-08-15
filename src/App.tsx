@@ -1,16 +1,19 @@
+import { useState } from 'react';
 import "@mantine/core/styles.css";
-import { AppShell, Burger, Group, MantineProvider } from "@mantine/core";
+import { AppShell, MantineProvider } from "@mantine/core";
 import { useDisclosure } from '@mantine/hooks';
-import classes from './components/NavBar/DeckedSideBar.module.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { NavbarNested } from './components/NavBar/NavbarNested';
-import { Logo } from './components/NavBar/Logo';
+
 
 import Overview from './pages/overview/Overview';
 import Dashboard from './pages/dashboard/Dashboard';
+import Header from './components/Header/Header';
+
 
 export default function App() {
   const [opened, { toggle }] = useDisclosure();
+  const [userMenuOpened, setUserMenuOpened] = useState(false);
 
   return (
     <MantineProvider defaultColorScheme="dark">
@@ -24,19 +27,7 @@ export default function App() {
           }}
           padding="md"
         >
-          <AppShell.Header>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-            />
-            <div className={classes.header}>
-              <Group justify="space-between">
-                <Logo style={{ width: 120 }} />
-              </Group>
-            </div>
-          </AppShell.Header>
+          <Header />
 
           <AppShell.Navbar>
             <NavbarNested />
